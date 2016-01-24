@@ -44,13 +44,13 @@ import android.util.Log;
 import android.widget.TextView;
 
 /**
- * @¥Î¨ÓPOST¸ê®Æ¤W¥hPHP¸ê®Æ®w
+ * @ï¿½Î¨ï¿½POSTï¿½ï¿½Æ¤Wï¿½hPHPï¿½ï¿½Æ®w
  *
  */
 public class PostDataAsyncTask extends AsyncTask<Integer, String, String> {
 	/**
-	 * Params -- ­n°õ¦æ doInBackground() ®É¶Ç¤Jªº°Ñ¼Æ¡A¼Æ¶q¥i¥H¤£¤î¤@­Ó Progress --
-	 * doInBackground() °õ¦æ¹Lµ{¤¤¦^¶Çµ¹ UI thread ªº¸ê®Æ¡A¼Æ¶q¥i¥H¤£¤î¤@­Ó Rsesult -- ¶Ç¦^°õ¦æµ²ªG¡A
+	 * Params -- ï¿½nï¿½ï¿½ï¿½ï¿½ doInBackground() ï¿½É¶Ç¤Jï¿½ï¿½ï¿½Ñ¼Æ¡Aï¿½Æ¶qï¿½iï¿½Hï¿½ï¿½ï¿½ï¿½@ï¿½ï¿½ Progress --
+	 * doInBackground() ï¿½ï¿½ï¿½ï¿½Lï¿½{ï¿½ï¿½ï¿½^ï¿½Çµï¿½ UI thread ï¿½ï¿½ï¿½ï¿½Æ¡Aï¿½Æ¶qï¿½iï¿½Hï¿½ï¿½ï¿½ï¿½@ï¿½ï¿½ Rsesult -- ï¿½Ç¦^ï¿½ï¿½ï¿½æµ²ï¿½Gï¿½A
 	 * 
 	 * */
 	private static final String TAG = "PostDataAsyncTask";
@@ -60,9 +60,10 @@ public class PostDataAsyncTask extends AsyncTask<Integer, String, String> {
 	private static WifiMainActivity WifiReceiver;
 	List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 	private static String Time;
-	
+
 	int actionChoice;
 	String reslutString = null;
+
 	PostDataAsyncTask(WifiMainActivity WifiReceiver) {
 		this.WifiReceiver = WifiReceiver;
 	}
@@ -83,12 +84,12 @@ public class PostDataAsyncTask extends AsyncTask<Integer, String, String> {
 			if (actionChoice == 0) {
 				postText(arg0[0].intValue());
 			}
-			else if(actionChoice==2){
+			else if (actionChoice == 2) {
 				cleardata();
 			}
 			else {
-				
-					getText(arg0[0].intValue(),arg0[1].intValue());
+
+				getText(arg0[0].intValue(), arg0[1].intValue());
 			}
 
 		} catch (NullPointerException e) {
@@ -108,66 +109,66 @@ public class PostDataAsyncTask extends AsyncTask<Integer, String, String> {
 
 	protected void onPostExecute(String lenghtOfFile) {
 		/**
-		 * ³oÃä¬O§â­è­èasynctaskªº¸ê®Æ¥þ³¡update to the views
+		 * ï¿½oï¿½ï¿½Oï¿½ï¿½ï¿½ï¿½asynctaskï¿½ï¿½ï¿½ï¿½Æ¥ï¿½ï¿½ï¿½update to the views
 		 * 
 		 * */
 
 		TextView result_text = (TextView) ((Activity) PostDataAsyncTask.WifiReceiver)
-				.findViewById(R.id.resulttext); // §â¶°¦X©Ò³Ñ¤Uªº¼Æ¥Øºâ¥X¨Ó
+				.findViewById(R.id.resulttext); // ï¿½â¶°ï¿½Xï¿½Ò³Ñ¤Uï¿½ï¿½ï¿½Æ¥Øºï¿½Xï¿½ï¿½
 		result_text.setMovementMethod(ScrollingMovementMethod.getInstance());
-		String tmp =WifiReceiver.returnValue.size()+"\n"+WifiReceiver.returnValue.keySet().toString() + " "+ WifiReceiver.returnValue.values().toString() + "\n";
+		String tmp = WifiReceiver.returnValue.size() + "\n" + WifiReceiver.returnValue.keySet().toString() + " " + WifiReceiver.returnValue.values().toString() + "\n";
 		result_text.setText(tmp);
 	}
-	private void  cleardata() throws ClientProtocolException, IOException, URISyntaxException{
+
+	private void cleardata() throws ClientProtocolException, IOException, URISyntaxException {
 		/**
-		 * ¬å¸ê®Æ®w
+		 * ï¿½ï¿½ï¿½Æ®w
 		 * 
 		 * */
-			HttpClient httpClient = new DefaultHttpClient();
-			HttpGet request = new HttpGet();// get ¸ê®Æ
-			request.setURI(new URI(deleteReciverUrl));
-			httpClient.execute(request);
-		
+		HttpClient httpClient = new DefaultHttpClient();
+		HttpGet request = new HttpGet();// get ï¿½ï¿½ï¿½
+		request.setURI(new URI(deleteReciverUrl));
+		httpClient.execute(request);
+
 	}
-	
-	
-	
+
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	private void getText(int go_or_back,int times_of_repeat) throws ParseException, IOException,URISyntaxException {
-		
+	private void getText(int go_or_back, int times_of_repeat) throws ParseException, IOException, URISyntaxException {
+
 		try {
 			/*
-			 * ³oÃä¬O¦b¸ò¸ê®Æ®w³s½u µM«á§â²Ä¤@¦¸¥hªº¸ê®Æ§ì¦^¨Ó
-			 * **/
-			if(times_of_repeat<1){
-			Log.i("³o­ÓÀ³¸Ó¥u¦³¤@¦¸","³o­ÓÀ³¸Ó¥u¦³¤@¦¸");
-			String line = null;
-			HttpClient httpClient = new DefaultHttpClient();
-			HttpGet request = new HttpGet();// get ¸ê®Æ
-			request.setURI(new URI(getReceiverUrl));
-			HttpResponse response = httpClient.execute(request);
-			BufferedReader in = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
-			StringBuilder sb = new StringBuilder();
-			while ((line = in.readLine()) != null) {
-				sb.append(line + "\n");//¦]¬°php¥ýjson encode¤F©Ò¥H¥ý§â¸ê®Æ¤@¦æ¤@¦æinputªñ¨Ó
-			reslutString = sb.toString();
-			}
+			 * ï¿½oï¿½ï¿½Oï¿½bï¿½ï¿½ï¿½Æ®wï¿½sï¿½u ï¿½Mï¿½ï¿½ï¿½Ä¤@ï¿½ï¿½ï¿½hï¿½ï¿½ï¿½ï¿½Æ§ï¿½^ï¿½ï¿½ *
+			 */
+			if (times_of_repeat < 1) {
+				Log.i("ï¿½oï¿½ï¿½ï¿½ï¿½ï¿½Ó¥uï¿½ï¿½ï¿½@ï¿½ï¿½", "ï¿½oï¿½ï¿½ï¿½ï¿½ï¿½Ó¥uï¿½ï¿½ï¿½@ï¿½ï¿½");
+				String line = null;
+				HttpClient httpClient = new DefaultHttpClient();
+				HttpGet request = new HttpGet();// get ï¿½ï¿½ï¿½
+				request.setURI(new URI(getReceiverUrl));
+				HttpResponse response = httpClient.execute(request);
+				BufferedReader in = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
+				StringBuilder sb = new StringBuilder();
+				while ((line = in.readLine()) != null) {
+					sb.append(line + "\n");// ï¿½]ï¿½ï¿½phpï¿½ï¿½json
+											// encodeï¿½Fï¿½Ò¥Hï¿½ï¿½ï¿½ï¿½ï¿½Æ¤@ï¿½ï¿½@ï¿½ï¿½inputï¿½ï¿½ï¿½
+					reslutString = sb.toString();
+				}
 				JSONArray jArray = new JSONArray(reslutString);
 				for (int i = 0; i < jArray.length(); i++) {
 					JSONObject json_data = jArray.getJSONObject(i);
-					WifiReceiver.returnValue.put(json_data.getString("BSSID"),json_data.getString("Level"));
-				}		
+					WifiReceiver.returnValue.put(json_data.getString("BSSID"), json_data.getString("Level"));
+				}
 			}
 			for (int i = 0; i < PostDataAsyncTask.WifiReceiver.wifiList.size(); i++) {
 				if (WifiReceiver.returnValue.containsKey(PostDataAsyncTask.WifiReceiver.wifiList.get(i).BSSID))
 					WifiReceiver.returnValue.remove(PostDataAsyncTask.WifiReceiver.wifiList.get(i).BSSID);
-				
+
 			}
 
 		} catch (JSONException e) {
-			Log.i("XXXXXX", "JSON¿ù¤F");
+			Log.i("XXXXXX", "JSONï¿½ï¿½ï¿½F");
 			e.printStackTrace();
-		}catch (ClientProtocolException e) {
+		} catch (ClientProtocolException e) {
 			e.printStackTrace();
 		}
 
@@ -197,8 +198,7 @@ public class PostDataAsyncTask extends AsyncTask<Integer, String, String> {
 
 				SSID.put(PostDataAsyncTask.WifiReceiver.wifiList.get(i).SSID);
 				BSSID.put(PostDataAsyncTask.WifiReceiver.wifiList.get(i).BSSID);
-				Level.put(String
-						.valueOf(PostDataAsyncTask.WifiReceiver.wifiList.get(i).level));
+				Level.put(String.valueOf(PostDataAsyncTask.WifiReceiver.wifiList.get(i).level));
 				TIME.put(String.valueOf(PostDataAsyncTask.Time));
 			}
 
@@ -211,12 +211,15 @@ public class PostDataAsyncTask extends AsyncTask<Integer, String, String> {
 			nameValuePairs.add(new BasicNameValuePair("bssid", BSSIDstr));
 			nameValuePairs.add(new BasicNameValuePair("time", Timestr));
 			nameValuePairs.add(new BasicNameValuePair("acceler", ACCELER));
-			nameValuePairs.add(new BasicNameValuePair("check", String
-					.valueOf(go_or_back)));
-			httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs,
-					HTTP.UTF_8));
+			nameValuePairs.add(new BasicNameValuePair("check", String.valueOf(go_or_back)));
+			nameValuePairs.add(new BasicNameValuePair("steps",String.valueOf(WifiReceiver.mStepValue)));
+			nameValuePairs.add(new BasicNameValuePair("distance",String.valueOf(WifiReceiver.mDistanceValue)));
+			nameValuePairs.add(new BasicNameValuePair("speed",String.valueOf(WifiReceiver.mSpeedValue)));
+			nameValuePairs.add(new BasicNameValuePair("direction",String.valueOf(WifiReceiver.degree[0])));
+			nameValuePairs.add(new BasicNameValuePair("turn",WifiReceiver.turn));
+			httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs,HTTP.UTF_8));
 
-			HttpResponse response = httpClient.execute(httpPost);// °e¥X¸ê®Æµ¹php
+			HttpResponse response = httpClient.execute(httpPost);// ï¿½eï¿½Xï¿½ï¿½Æµï¿½php
 
 			HttpEntity resEntity = response.getEntity();
 

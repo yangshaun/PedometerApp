@@ -1,4 +1,4 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/LinearLayout1"
     android:layout_width="match_parent"
@@ -10,48 +10,84 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.wifiinfoapp.WifiMainActivity" >
 
-    <Button
-        android:id="@+id/WifiButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Search Wifi" />
-
-    <ProgressBar
-        android:id="@+id/progressBar1"
-        style="?android:attr/progressBarStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="invisible" />
-
-    <Button
-        android:id="@+id/gobackbutton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Go back" />
-
-    <TextView
-        android:id="@+id/mainText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Medium Text"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <ListView
-        android:id="@+id/listView1"
-        android:layout_width="match_parent"
-        android:layout_height="221dp" >
-    </ListView>
-
-    <TextView
-        android:id="@+id/resulttext"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:maxLines="5"
-        android:scrollbars="vertical"
-        android:singleLine="false"
-        android:text="result"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:width="250px" />
+        android:orientation="vertical" >
 
-</LinearLayout>
+        <Button
+            android:id="@+id/WifiButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Search Wifi" />
+
+        <ProgressBar
+            android:id="@+id/progressBar1"
+            style="?android:attr/progressBarStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="invisible" />
+
+        <Button
+            android:id="@+id/gobackbutton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Go back" />
+
+        <TextView
+            android:id="@+id/mainText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Medium Text"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <ListView
+            android:id="@+id/listView1"
+            android:layout_width="match_parent"
+            android:layout_height="221dp" >
+        </ListView>
+
+        <TextView
+            android:id="@+id/resulttext"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:maxLines="5"
+            android:scrollbars="vertical"
+            android:singleLine="false"
+            android:text="result"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:width="250px" />
+
+        <com.example.wifiinfoapp.SurfaceTest
+            android:id="@+id/surface"
+            android:layout_width="match_parent"
+            android:layout_height="250dp" />
+
+        <TextView
+            android:id="@+id/distance_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="distance_value" />
+
+        <TextView
+            android:id="@+id/speed_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="speed_value" />
+
+        <TextView
+            android:id="@+id/step_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="step_value" />
+
+        <TextView
+            android:id="@+id/tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Medium Text"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+        
+    </LinearLayout>
+
+</ScrollView>

@@ -27,12 +27,17 @@ public final class R {
     public static final class id {
         public static final int LinearLayout1=0x7f080000;
         public static final int WifiButton=0x7f080001;
-        public static final int action_settings=0x7f080007;
+        public static final int action_settings=0x7f08000c;
+        public static final int distance_value=0x7f080008;
         public static final int gobackbutton=0x7f080003;
         public static final int listView1=0x7f080005;
         public static final int mainText=0x7f080004;
         public static final int progressBar1=0x7f080002;
         public static final int resulttext=0x7f080006;
+        public static final int speed_value=0x7f080009;
+        public static final int step_value=0x7f08000a;
+        public static final int surface=0x7f080007;
+        public static final int tv=0x7f08000b;
     }
     public static final class layout {
         public static final int activity_wifi_main=0x7f030000;
@@ -42,8 +47,98 @@ public final class R {
     }
     public static final class string {
         public static final int action_settings=0x7f050002;
+        public static final int activity_settings=0x7f050017;
         public static final int app_name=0x7f050000;
+        public static final int body_weight_setting=0x7f050033;
+        public static final int body_weight_setting_details=0x7f050034;
+        public static final int body_weight_setting_title=0x7f050035;
+        public static final int calories_burned=0x7f05000c;
+        public static final int centimeters=0x7f05000d;
+        public static final int desired_pace=0x7f050011;
+        public static final int desired_speed=0x7f050012;
+        public static final int exercise_type_running=0x7f050039;
+        public static final int exercise_type_setting=0x7f050036;
+        public static final int exercise_type_setting_details=0x7f050037;
+        public static final int exercise_type_setting_title=0x7f050038;
+        public static final int exercise_type_walking=0x7f05003a;
+        public static final int extra_high=0x7f05001c;
+        public static final int extra_low=0x7f050024;
         public static final int hello_world=0x7f050001;
+        public static final int high=0x7f05001e;
+        public static final int higher=0x7f05001f;
+        public static final int inches=0x7f05000e;
+        public static final int incorrect_step_length=0x7f050059;
+        public static final int interval_10_minutes=0x7f05004b;
+        public static final int interval_15_seconds=0x7f050046;
+        public static final int interval_1_minute=0x7f050048;
+        public static final int interval_2_minutes=0x7f050049;
+        public static final int interval_30_seconds=0x7f050047;
+        public static final int interval_5_minutes=0x7f05004a;
+        public static final int keep_screen_on=0x7f050029;
+        public static final int kilograms=0x7f05000f;
+        public static final int kilometers=0x7f050007;
+        public static final int kilometers_per_hour=0x7f05000a;
+        public static final int low=0x7f050022;
+        public static final int lower=0x7f050021;
+        public static final int maintain_nothing=0x7f05003e;
+        public static final int maintain_pace=0x7f05003f;
+        public static final int maintain_setting=0x7f05003b;
+        public static final int maintain_setting_details=0x7f05003c;
+        public static final int maintain_setting_title=0x7f05003d;
+        public static final int maintain_speed=0x7f050040;
+        public static final int medium=0x7f050020;
+        public static final int miles=0x7f050008;
+        public static final int miles_per_hour=0x7f05000b;
+        public static final int notification_subtitle=0x7f050003;
+        public static final int operation_level_setting=0x7f050025;
+        public static final int operation_level_setting_details=0x7f050026;
+        public static final int operation_level_setting_title=0x7f050027;
+        public static final int pause=0x7f050013;
+        public static final int pounds=0x7f050010;
+        public static final int quit=0x7f05005a;
+        public static final int reset=0x7f050015;
+        public static final int resume=0x7f050014;
+        public static final int run_in_background=0x7f050028;
+        public static final int sensitivity_setting=0x7f050019;
+        public static final int sensitivity_setting_details=0x7f05001a;
+        public static final int sensitivity_setting_title=0x7f05001b;
+        /**  Settings 
+         */
+        public static final int settings=0x7f050016;
+        public static final int speaking_interval_setting=0x7f050044;
+        public static final int speaking_interval_setting_details=0x7f050045;
+        public static final int started=0x7f050004;
+        public static final int step_length_setting=0x7f050030;
+        public static final int step_length_setting_details=0x7f050031;
+        public static final int step_length_setting_title=0x7f050032;
+        public static final int steps=0x7f050006;
+        public static final int steps_per_minute=0x7f050009;
+        public static final int steps_settings_title=0x7f050018;
+        public static final int stopped=0x7f050005;
+        public static final int tell_calories_setting=0x7f050055;
+        public static final int tell_calories_setting_details=0x7f050056;
+        public static final int tell_distance_setting=0x7f050051;
+        public static final int tell_distance_setting_details=0x7f050052;
+        public static final int tell_fasterslower_setting=0x7f050057;
+        public static final int tell_fasterslower_setting_details=0x7f050058;
+        public static final int tell_pace_setting=0x7f05004f;
+        public static final int tell_pace_setting_details=0x7f050050;
+        public static final int tell_speed_setting=0x7f050053;
+        public static final int tell_speed_setting_details=0x7f050054;
+        public static final int tell_steps_setting=0x7f05004d;
+        public static final int tell_steps_setting_details=0x7f05004e;
+        public static final int tell_what=0x7f05004c;
+        public static final int units_imperial=0x7f05002f;
+        public static final int units_metric=0x7f05002e;
+        public static final int units_setting=0x7f05002b;
+        public static final int units_setting_details=0x7f05002c;
+        public static final int units_setting_title=0x7f05002d;
+        public static final int very_high=0x7f05001d;
+        public static final int very_low=0x7f050023;
+        public static final int voice_setting=0x7f050042;
+        public static final int voice_setting_details=0x7f050043;
+        public static final int voice_settings_title=0x7f050041;
+        public static final int wake_up=0x7f05002a;
     }
     public static final class style {
         /** 
