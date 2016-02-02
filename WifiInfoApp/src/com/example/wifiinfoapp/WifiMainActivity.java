@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -68,7 +69,7 @@ public class WifiMainActivity extends Activity {
 	//------------------Timer
 	StringBuilder sb = new StringBuilder();
 	Timer timerAsync;
-	TimerTask timerTaskAsync;
+	MyTimerTask timerTaskAsync;
 	private static boolean stopping = false;
 	ArrayAdapter<String> adapter;
 	//------------------Timer
@@ -91,7 +92,7 @@ public class WifiMainActivity extends Activity {
     private TextView mSpeedValueView;
     private TextView mCaloriesValueView;
     TextView mDesiredPaceView;
-    public  int mStepValue;
+    public  AtomicInteger mStepValue= new AtomicInteger(0);
     private int mPaceValue;
     public  float mDistanceValue;
     public  float mSpeedValue;
@@ -123,12 +124,16 @@ public class WifiMainActivity extends Activity {
 			@Override
 			public void onClick(View arg0) {
 				progressbar.setVisibility(View.VISIBLE);
-				StartSearch();
-				goback_check=false;
 				StartCountSteps();
-				new AccelerometerDetect(WifiMainActivity.this,stopping);
-				new PostDataAsyncTask(WifiMainActivity.this)
-				.execute(0);//0�N��O�h
+				
+				
+				//StartSearch();
+				goback_check=false;
+				
+				//new AccelerometerDetect(WifiMainActivity.this,stopping);
+				
+//				new PostDataAsyncTask(WifiMainActivity.this)
+//				.execute(0);//0�N��O�h
 				
 				
 				
@@ -143,11 +148,11 @@ public class WifiMainActivity extends Activity {
 				// TODO Auto-generated method stub
 				goback_check=true;
 				times_of_repeat=0;
-				mStepValue = 0;
+				mStepValue .set(0);
 		        mPaceValue = 0;
 				new PostDataAsyncTask(WifiMainActivity.this)
 				.execute(1,times_of_repeat);//�N��O�^��
-
+				times_of_repeat++;
 			}});
 		
 		
@@ -155,7 +160,7 @@ public class WifiMainActivity extends Activity {
 	}
 	
 	private void  StartCountSteps(){
-        mStepValue = 0;
+		mStepValue .set(0);
         mPaceValue = 0;
         mUtils = Utils.getInstance();
 		//-----------        
@@ -264,13 +269,18 @@ public class WifiMainActivity extends Activity {
     private static final int DISTANCE_MSG = 3;
     private static final int SPEED_MSG = 4;
     private static final int CALORIES_MSG = 5;
-    
+    private int previous_value=0;
     private Handler mHandler = new Handler() {
-        @Override public void handleMessage(Message msg) {
+        @Override public  void handleMessage(Message msg) {
             switch (msg.what) {
                 case STEPS_MSG:
-                    mStepValue = (int)msg.arg1;
+                	
+                    mStepValue.set( (int)msg.arg1);
                     mStepValueView.setText("Steps: " + mStepValue);
+                    if(mStepValue .get()%3==0&&previous_value!=mStepValue.get())
+                    	StartSearch(mStepValue.get());
+                    previous_value=mStepValue.get();
+                	
                     break;
                
                 case DISTANCE_MSG:
@@ -313,10 +323,9 @@ public class WifiMainActivity extends Activity {
 		super.onResume();
 	}
 
-	public class MyTimerTask extends TimerTask {
+	public class MyTimerTask  {
 		
-		@Override
-		public void run() {
+		public void run(int PASSforSteps) {
 			
 			if (stopping == false) {
 				
@@ -335,45 +344,26 @@ public class WifiMainActivity extends Activity {
 				
 				mainWifi.startScan();
 				
-				Log.i("penis", previousDegree+"   一");
-				Log.i("penis", degree[0]+"   二");
 				
 				if(degree[0]-previousDegree>45){//向右轉
-					
-					turn=" RIGHT";
-					
+					turn=" RIGHT";				
 				}
 				else if(degree[0]-previousDegree<-45){//向左轉
 					
-					turn="LEFT";
-					
-					
+					turn="LEFT";			
 				}
 				else{//直走
 					turn="STRAIGHT";
-					
-					
 				}
 				previousDegree=degree[0];			
-				
 				mutex=1;
-				
-				
-				
-				
-				
-				
-				
 				new AccelerometerDetect(WifiMainActivity.this,stopping);
 				if(goback_check==false)
-					new PostDataAsyncTask(WifiMainActivity.this).execute(0);
+					new PostDataAsyncTask(WifiMainActivity.this).execute(0,PASSforSteps);
 				else{
 					new PostDataAsyncTask(WifiMainActivity.this).execute(1,times_of_repeat);
 					times_of_repeat++;
-				}
-					
-		
-			} else {
+				}} else {
  
 				timerAsync.cancel();
 				timerAsync.purge();
@@ -436,7 +426,7 @@ public class WifiMainActivity extends Activity {
 		String formattedDate = sdf.format(date);
 		return formattedDate;
 	}
-	public void StartSearch() {
+	public void StartSearch(int PASSforSteps) {
 				stopping =false;
 				
 				Sensor accelerometer = mSensorManager
@@ -453,7 +443,7 @@ public class WifiMainActivity extends Activity {
 		registerReceiver(receiverWifi=new BroadcastReceiver(){
 
 			@Override
-			public void onReceive(Context context, Intent intent) {
+			public void onReceive(Context context, Intent intent) {/////////////////////////////////////////////////////
 				wifiList=mainWifi.getScanResults();
 				WifiAry = new String[WifiMainActivity.wifiList.size()];
 				
@@ -466,7 +456,7 @@ public class WifiMainActivity extends Activity {
 			PutWifiData();
 		timerAsync = new Timer();
 		timerTaskAsync = new MyTimerTask();
-		timerAsync.schedule(timerTaskAsync, 0, 4000);
+		timerTaskAsync.run(PASSforSteps);
 		
 	}
 
@@ -511,12 +501,7 @@ public class WifiMainActivity extends Activity {
 		}
 
 	}
-	
-	
-	
-	/**
-	 * @�o��O�]�wmenu
-	 * */
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -530,7 +515,10 @@ public class WifiMainActivity extends Activity {
 	public boolean onMenuItemSelected(int featureId, MenuItem item) {
 		switch (item.getItemId()) {
 			case 0:
-				StartSearch();
+				   if(mStepValue.get()%3==0&&previous_value!=mStepValue.get())
+					   StartSearch(mStepValue.get());
+				   previous_value=mStepValue.get();
+				   
 				break;
 			case 1:
 				stopping = true;
